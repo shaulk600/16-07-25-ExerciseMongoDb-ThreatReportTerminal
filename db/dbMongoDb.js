@@ -1,13 +1,21 @@
 
 import { config } from "dotenv";
 config();
-import { MongoClient } from "mongodb";
-
+import { MongoClient , Db} from "mongodb";
 
 const clinet =  new MongoClient(process.env.DB_CONNECTION);
-let db; 
-const DBNAME = "Threat_report_terminal_exercise";
 
+/**
+ * @type {Db | null}
+ */
+
+let db = null; //חייבים להגדיר ערך - אז נגדיר null
+
+/**
+ * @returns {Promise<Db>}
+ */
+
+const DBNAME = "Threat_report_terminal_exercise";
 export async function connect() {
     if(!db){
         await clinet.connect();
@@ -17,6 +25,8 @@ export async function connect() {
     return db;
 }
 export default connect;
+
+
 
 
 
